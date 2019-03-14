@@ -5,7 +5,7 @@ public class DBConn {
 
     private String username = "java"; //This is the username to my DB; change to what your is
     private String password = "123";
-    private Connection conn;
+    protected Connection conn;
 
 
     public DBConn() {
