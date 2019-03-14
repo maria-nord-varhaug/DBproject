@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DBConn {
+public abstract class DBConn {
 
     private String username = "java"; //This is the username to my DB; change to what your is
     private String password = "123";
