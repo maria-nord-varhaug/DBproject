@@ -7,15 +7,15 @@ public class DBConn {
     private String password = "123";
 
 
-    private DBConn() {
+    public DBConn() {
     }
 
     public static void main(String[] args) {
-        DBConn conn = new DBConn();
-        conn.connect();
+        //DBConn conn = new DBConn();
+        //conn.connect();
     }
 
-    private void connect() {
+    public void connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();    //Format: IP:portnumber/dbname
             //I have a database called workoutournal

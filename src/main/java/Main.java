@@ -1,6 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        // Nothing here yet
+        DBConn conn = new DBConn();
+        conn.connect();
     }
 }
