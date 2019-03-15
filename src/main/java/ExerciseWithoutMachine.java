@@ -9,4 +9,7 @@ public class ExerciseWithoutMachine extends Exercise {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
 }

@@ -11,4 +11,16 @@ public class MachineExercise extends Exercise {
         this.sets = sets;
         this.workoutMachine = workoutMachine;
     }
+
+    public int getKg() {
+        return kg;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public WorkoutMachine getWorkoutMachine() {
+        return workoutMachine;
+    }
 }
