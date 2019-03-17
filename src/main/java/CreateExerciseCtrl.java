@@ -18,17 +18,18 @@ public class CreateExerciseCtrl extends DBConn {
         this.scanner = new Scanner(System.in);
     }
 
-    public static void main(String args[]) {
-        CreateExerciseCtrl cec = new CreateExerciseCtrl();
-        cec.addExercise();
-    }
-
     private void createMachineExercise(String eName, int performance, int kg, int sets, WorkoutMachine workoutMachine) {
         exercise = new MachineExercise(eName, performance, kg, sets, workoutMachine);
     }
 
     private void createExerciseWithoutMachine(String eName, int performance, String description) {
         exercise = new ExerciseWithoutMachine(eName, performance, description);
+    }
+
+    public static void main(String args[]) {
+
+        //CreateExerciseCtrl cec = new CreateExerciseCtrl();
+        //cec.addExercise();
     }
 
     private void addMachineExercise() {
@@ -59,19 +60,6 @@ public class CreateExerciseCtrl extends DBConn {
         exercise.save(conn);  //Adds exercise's subclasses to DB
     }
 
-    private void addExerciseWithoutMachine() { //TODO: implement method for creating statements and stuff, same as machineexercise
-        String eName;
-        String description;
-        int performance;
-        System.out.println("What is the name of the exercise you did?");
-        eName = scanner.nextLine();
-        System.out.println("Could you describe the exercise?");
-        description = scanner.nextLine();
-        System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
-        performance = scanner.nextInt();
-        createExerciseWithoutMachine(eName, performance, description);
-    }
-
     public void addExercise() {
         String s;
         System.out.println("If you want to log an exercise with machine write 'machine', else write 'body': ");
@@ -82,5 +70,20 @@ public class CreateExerciseCtrl extends DBConn {
             addExerciseWithoutMachine();
         }
         scanner.close();
+    }
+
+    private void addExerciseWithoutMachine() {
+        String eName;
+        String description;
+        int performance;
+        System.out.println("What is the name of the exercise you did?");
+        eName = scanner.nextLine();
+        System.out.println("Could you describe the exercise?");
+        description = scanner.nextLine();
+        System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
+        performance = scanner.nextInt();
+
+        createExerciseWithoutMachine(eName, performance, description);
+        exercise.save(conn);
     }
 }
