@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class CreateExerciseCtrl extends DBConn {
 
-    private Scanner sc;
-    private Exercise e;
+    private Scanner scanner;
+    private Exercise exercise;
 
     public CreateExerciseCtrl() {
         connect();
@@ -15,37 +15,20 @@ public class CreateExerciseCtrl extends DBConn {
             System.out.println("db error during setAuoCommit of LagAvtaleCtrl=" + e);
             return;
         }
-        this.sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     public static void main(String args[]) {
-
         CreateExerciseCtrl cec = new CreateExerciseCtrl();
         cec.addExercise();
-        /*int a;
-        float b;
-        String s;
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter a string");
-        s = in.nextLine();
-        System.out.println("You entered string " + s);
-
-        System.out.println("Enter an integer");
-        a = in.nextInt();
-        System.out.println("You entered integer " + a);
-
-        System.out.println("Enter a float");
-        b = in.nextFloat();
-        System.out.println("You entered float " + b);*/
     }
 
     private void createMachineExercise(String eName, int performance, int kg, int sets, WorkoutMachine workoutMachine) {
-        e = new MachineExercise(eName, performance, kg, sets, workoutMachine);
+        exercise = new MachineExercise(eName, performance, kg, sets, workoutMachine);
     }
 
     private void createExerciseWithoutMachine(String eName, int performance, String description) {
-        e = new ExerciseWithoutMachine(eName, performance, description);
+        exercise = new ExerciseWithoutMachine(eName, performance, description);
     }
 
     private void addMachineExercise() {
@@ -57,19 +40,21 @@ public class CreateExerciseCtrl extends DBConn {
         int sets;
         WorkoutMachine wm;
         System.out.println("What is the name of the machine you used?");
-        machinename = sc.nextLine();
+        machinename = scanner.nextLine();
         System.out.println("Can you give a short description of the machine?");
-        description = sc.nextLine();
-        wm = new WorkoutMachine(machinename, description);
+        description = scanner.nextLine();
         System.out.println("Sweet. Now, what is the name of the exercise you did?");
-        eName = sc.nextLine();
+        eName = scanner.nextLine();
         System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
-        performance = sc.nextInt();
+        performance = scanner.nextInt();
         System.out.println("How many kgs?");
-        kg = sc.nextInt();
+        kg = scanner.nextInt();
         System.out.println("How many sets?");
-        sets = sc.nextInt();
+        sets = scanner.nextInt();
+        wm = new WorkoutMachine(machinename, description);
         createMachineExercise(eName, performance, kg, sets, wm);
+        wm.createWorkoutMachine(conn);
+        exercise.save(conn);  //Adds exercise's subclasses to DB
     }
 
     private void addExerciseWithoutMachine() {
@@ -77,33 +62,23 @@ public class CreateExerciseCtrl extends DBConn {
         String description;
         int performance;
         System.out.println("What is the name of the exercise you did?");
-        eName = sc.nextLine();
+        eName = scanner.nextLine();
         System.out.println("Could you describe the exercise?");
-        description = sc.nextLine();
+        description = scanner.nextLine();
         System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
-        performance = sc.nextInt();
+        performance = scanner.nextInt();
         createExerciseWithoutMachine(eName, performance, description);
     }
 
     public void addExercise() {
         String s;
-        System.out.println("If you want to log an exercise with machine write 'm', else write 'e': ");
-        s = sc.nextLine();
-        if (s.equals("m")) {
+        System.out.println("If you want to log an exercise with machine write 'machine', else write 'body': ");
+        s = scanner.nextLine();
+        if (s.equals("machine")) {
             addMachineExercise();
         } else {
             addExerciseWithoutMachine();
         }
-        sc.close();
-    }
-
-    public void addToDB() {
-        //avtale.save(conn);
-        try {
-            conn.commit();
-        } catch (SQLException e) {
-            System.out.println("db error during commit of LagAvtaleCtrl=" + e);
-            return;
-        }
+        scanner.close();
     }
 }
