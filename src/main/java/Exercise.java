@@ -25,6 +25,8 @@ public class Exercise {
             stmt.setString(1, eName);
             stmt.setInt(2, performance);
             stmt.executeUpdate();
+
+            //This fetches the newly inserted ID :))
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             setExerciseID(rs.getInt(1));
