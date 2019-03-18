@@ -36,7 +36,12 @@ public class Exercise {
         }
     }
 
+    //java <3
+
+
+
     public void save(Connection conn) {
+
     }
 
 

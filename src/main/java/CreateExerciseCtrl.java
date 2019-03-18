@@ -26,12 +26,6 @@ public class CreateExerciseCtrl extends DBConn {
         exercise = new ExerciseWithoutMachine(eName, performance, description);
     }
 
-    public static void main(String args[]) {
-
-        //CreateExerciseCtrl cec = new CreateExerciseCtrl();
-        //cec.addExercise();
-    }
-
     private void addMachineExercise() {
         String machinename;
         String description;
@@ -85,5 +79,11 @@ public class CreateExerciseCtrl extends DBConn {
 
         createExerciseWithoutMachine(eName, performance, description);
         exercise.save(conn);
+    }
+
+
+    public static void main(String args[]) {
+        //CreateExerciseCtrl cec = new CreateExerciseCtrl();
+        //cec.addExercise();
     }
 }
