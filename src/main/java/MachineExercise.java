@@ -17,7 +17,7 @@ public class MachineExercise extends Exercise {
     @Override
     public void save(Connection conn) {  //Lagrer machineexercise
         try {
-            createExercise(conn);
+            super.save(conn);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Machineexercise VALUES (?, ?, ?, ?)");
             stmt.setInt(1, exerciseID);
             stmt.setInt(2, kg);

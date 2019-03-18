@@ -13,14 +13,6 @@ public class WorkoutMachine {
         this.mDescription = mDescription;
     }
 
-    public int getMachineID() {
-        return machineID;
-    }
-
-    public void setMachineID(int machineID) {
-        this.machineID = machineID;
-    }
-
 
     public void createWorkoutMachine(Connection conn) {  //We need to create an exercise first in order to create the subclasses
         try {
@@ -31,7 +23,7 @@ public class WorkoutMachine {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            setMachineID(rs.getInt(1));
+            machineID = rs.getInt(1);
             System.out.println(machineID);
         } catch (Exception e) {
             System.out.println("Failed to create exercise=" + e);
