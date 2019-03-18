@@ -1,4 +1,6 @@
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.Scanner;
 
 public class WorkoutCtrl extends DBConn {
@@ -16,8 +18,16 @@ public class WorkoutCtrl extends DBConn {
         this.scanner = new Scanner(System.in);
     }
 
-    private void createWorkout() {
-
+    private void createWorkout(Date date, Time time, int duration, int personalshape, String note) {
+        //workout = new Workout(date, time, duration, personalshape, note);
     }
 
+    public void addWorkout() {
+        Date date;
+        Time time;
+        int duration;
+        int personalshape;
+        String note;
+
+    }
 }
