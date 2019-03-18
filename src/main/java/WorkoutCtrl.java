@@ -56,7 +56,6 @@ public class WorkoutCtrl extends DBConn {
 
         while (answer.equals("Y")) {
             //TODO: create exercise
-            //
             System.out.println(querystring);
             answer = scanner.nextLine();
         }
