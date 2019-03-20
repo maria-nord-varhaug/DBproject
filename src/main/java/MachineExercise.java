@@ -11,7 +11,7 @@ public class MachineExercise extends Exercise {
         super(eName, performance);
         this.kg = kg;
         this.sets = sets;
-        this.workoutMachineID = 15;
+        this.workoutMachineID = workoutMachine.getMachineID();
     }
 
     @Override

@@ -26,32 +26,9 @@ public class CreateExerciseCtrl extends DBConn {
         exercise = new ExerciseWithoutMachine(eName, performance, description);
     }
 
-    private void addMachineExercise() {
-        String machinename;
-        String description;
-        String eName;
-        int performance;
-        int kg;
-        int sets;
-        WorkoutMachine wm;
-
-        System.out.println("What is the name of the machine you used?");
-        machinename = scanner.nextLine();
-        System.out.println("Can you give a short description of the machine?");
-        description = scanner.nextLine();
-        System.out.println("Sweet. Now, what is the name of the exercise you did?");
-        eName = scanner.nextLine();
-        System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
-        performance = scanner.nextInt();
-        System.out.println("How many kgs?");
-        kg = scanner.nextInt();
-        System.out.println("How many sets?");
-        sets = scanner.nextInt();
-
-        wm = new WorkoutMachine(machinename, description);
-        createMachineExercise(eName, performance, kg, sets, wm);
-        wm.createWorkoutMachine(conn);
-        exercise.save(conn);  //Adds exercise's subclasses to DB
+    public static void main(String args[]) {
+        CreateExerciseCtrl cec = new CreateExerciseCtrl();
+        cec.addExercise();
     }
 
     public void addExercise() {
@@ -81,9 +58,31 @@ public class CreateExerciseCtrl extends DBConn {
         exercise.save(conn);
     }
 
+    private void addMachineExercise() {
+        String machinename;
+        String description;
+        String eName;
+        int performance;
+        int kg;
+        int sets;
+        WorkoutMachine wm;
 
-    public static void main(String args[]) {
-        //CreateExerciseCtrl cec = new CreateExerciseCtrl();
-        //cec.addExercise();
+        System.out.println("What is the name of the machine you used?");
+        machinename = scanner.nextLine();
+        System.out.println("Can you give a short description of the machine?");
+        description = scanner.nextLine();
+        System.out.println("Sweet. Now, what is the name of the exercise you did?");
+        eName = scanner.nextLine();
+        System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
+        performance = scanner.nextInt();
+        System.out.println("How many kgs?");
+        kg = scanner.nextInt();
+        System.out.println("How many sets?");
+        sets = scanner.nextInt();
+
+        wm = new WorkoutMachine(machinename, description);
+        wm.createWorkoutMachine(conn);
+        createMachineExercise(eName, performance, kg, sets, wm);
+        exercise.save(conn);  //Adds exercise's subclasses to DB
     }
 }
