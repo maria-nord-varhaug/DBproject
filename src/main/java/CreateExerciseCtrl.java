@@ -1,3 +1,8 @@
+import models.Exercise;
+import models.ExerciseWithoutMachine;
+import models.Machine;
+import models.MachineExercise;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -26,7 +31,7 @@ public class CreateExerciseCtrl extends DBConn {
         exercise = new ExerciseWithoutMachine(eName, performance, description);
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         CreateExerciseCtrl cec = new CreateExerciseCtrl();
         cec.addExercise();
     }

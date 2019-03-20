@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +35,7 @@ public class Exercise extends ActiveDomainObject {
     public void save(Connection conn) {
         try {
             PreparedStatement stmt;
-            stmt = conn.prepareStatement("INSERT INTO Exercise (EName, Performance) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conn.prepareStatement("INSERT INTO Exercise(EName, Performance) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, eName);
             stmt.setInt(2, performance);
             stmt.executeUpdate();

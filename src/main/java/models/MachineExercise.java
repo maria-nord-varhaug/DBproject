@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -7,7 +9,7 @@ public class MachineExercise extends Exercise {
     private int kg;
     private int sets;
 
-    MachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
+    public MachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
         super(eName, performance);
         this.kg = kg;
         this.sets = sets;

@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.*;
 import java.util.List;
 
@@ -114,6 +116,10 @@ public class Workout extends ActiveDomainObject {
     }
 
     public void save(Connection conn) {
+
+    }
+
+    public void list(Connection conn) {
 
     }
 }

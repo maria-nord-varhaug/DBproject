@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -6,7 +8,7 @@ public class ExerciseWithoutMachine extends Exercise {
 
     private String description;
 
-    ExerciseWithoutMachine(String eName, int performance, String description) {
+    public ExerciseWithoutMachine(String eName, int performance, String description) {
         super(eName, performance);
         this.description = description;
     }
