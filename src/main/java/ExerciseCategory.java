@@ -14,18 +14,28 @@ public class ExerciseCategory {
     private String name;
     private int exerciseCategoryID;
 
-    public void ExerciseCategory(String n){
+    public ExerciseCategory(String n){
         this.name=n;
     }
 
-    public void createExerciseCategory(Connection conn){
+    public void setExerciseCategoryID(int ecid){
+        this.exerciseCategoryID=ecid;
+    }
+
+    public void save(Connection conn){
         try{
             PreparedStatement stmt;
-            stmt=conn.prepareStatement("INSERT INTO ExerciseCategory ()");
+            stmt=conn.prepareStatement("INSERT INTO ExerciseCategory VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1,name);
+            stmt.executeUpdate();
 
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            setExerciseCategoryID(rs.getInt(1));
+            System.out.println(exerciseCategoryID);
         }
         catch(Exception e){
-
+            System.out.println("Failed to create exercise category = "+e);
         }
 
     }
