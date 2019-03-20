@@ -3,12 +3,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class WorkoutMachine {
+public class Machine extends ActiveDomainObject {
     private String name;
     private String mDescription;
     private int machineID;
 
-    public WorkoutMachine(String name, String mDescription) {
+    public Machine(String name, String mDescription) {
         this.name = name;
         this.mDescription = mDescription;
     }
@@ -22,7 +22,15 @@ public class WorkoutMachine {
     }
 
 
-    public void createWorkoutMachine(Connection conn) {  //We need to create an exercise first in order to create the subclasses
+    public void initialize(Connection conn) {
+
+    }
+
+    public void refresh(Connection conn) {
+
+    }
+
+    public void save(Connection conn) {
         try {
             PreparedStatement stmt;
             stmt = conn.prepareStatement("INSERT INTO Machine (MDescription, Name) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -31,11 +39,14 @@ public class WorkoutMachine {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            setMachineID(rs.getInt(1));
+            machineID = rs.getInt(1);
             System.out.println(machineID);
         } catch (Exception e) {
             System.out.println("Failed to create exercise=" + e);
         }
     }
 
+    public void list(Connection conn) {
+
+    }
 }

@@ -7,17 +7,17 @@ public class MachineExercise extends Exercise {
     private int kg;
     private int sets;
 
-    MachineExercise(String eName, int performance, int kg, int sets, WorkoutMachine workoutMachine) {
+    MachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
         super(eName, performance);
         this.kg = kg;
         this.sets = sets;
-        this.workoutMachineID = workoutMachine.getMachineID();
+        this.workoutMachineID = machine.getMachineID();
     }
 
     @Override
     public void save(Connection conn) {  //Lagrer machineexercise
         try {
-            createExercise(conn);
+            super.save(conn);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Machineexercise VALUES (?, ?, ?, ?)");
             stmt.setInt(1, exerciseID);
             stmt.setInt(2, kg);

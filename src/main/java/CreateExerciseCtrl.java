@@ -18,8 +18,8 @@ public class CreateExerciseCtrl extends DBConn {
         this.scanner = new Scanner(System.in);
     }
 
-    private void createMachineExercise(String eName, int performance, int kg, int sets, WorkoutMachine workoutMachine) {
-        exercise = new MachineExercise(eName, performance, kg, sets, workoutMachine);
+    private void createMachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
+        exercise = new MachineExercise(eName, performance, kg, sets, machine);
     }
 
     private void createExerciseWithoutMachine(String eName, int performance, String description) {
@@ -65,7 +65,7 @@ public class CreateExerciseCtrl extends DBConn {
         int performance;
         int kg;
         int sets;
-        WorkoutMachine wm;
+        Machine wm;
 
         System.out.println("What is the name of the machine you used?");
         machinename = scanner.nextLine();
@@ -80,8 +80,8 @@ public class CreateExerciseCtrl extends DBConn {
         System.out.println("How many sets?");
         sets = scanner.nextInt();
 
-        wm = new WorkoutMachine(machinename, description);
-        wm.createWorkoutMachine(conn);
+        wm = new Machine(machinename, description);
+        wm.save(conn);
         createMachineExercise(eName, performance, kg, sets, wm);
         exercise.save(conn);  //Adds exercise's subclasses to DB
     }
