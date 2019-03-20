@@ -7,11 +7,11 @@ public class MachineExercise extends Exercise {
     private int kg;
     private int sets;
 
-    MachineExercise(String eName, int performance, int kg, int sets, WorkoutMachine workoutMachine) {
+    MachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
         super(eName, performance);
         this.kg = kg;
         this.sets = sets;
-        this.workoutMachineID = workoutMachine.getMachineID();
+        this.workoutMachineID = machine.getMachineID();
     }
 
     @Override
