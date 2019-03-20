@@ -3,7 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Exercise {
+public class Exercise extends ActiveDomainObject {
 
     protected String eName;   //I think we need to be able to access these through subclasses?
     protected int performance;
@@ -14,11 +14,23 @@ public class Exercise {
         this.performance = performance;
     }
 
-    public void setExerciseID(int exerciseID) {
-        this.exerciseID = exerciseID;
+    public void createExercise(Connection conn) {  //We need to create an exercise first in order to create the subclasses
+
     }
 
-    public void createExercise(Connection conn) {  //We need to create an exercise first in order to create the subclasses
+
+    @Override
+    public void initialize(Connection conn) {
+
+    }
+
+    @Override
+    public void refresh(Connection conn) {
+
+    }
+
+    @Override
+    public void save(Connection conn) {
         try {
             PreparedStatement stmt;
             stmt = conn.prepareStatement("INSERT INTO Exercise (EName, Performance) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -29,33 +41,17 @@ public class Exercise {
             //This fetches the newly inserted ID :))
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            setExerciseID(rs.getInt(1));
+            exerciseID = rs.getInt(1);
             System.out.println(exerciseID);
         } catch (Exception e) {
-            System.out.println("Failed to create exercise=" + e);
+            System.out.println("Failed to create/update exercise=" + e);
+            e.printStackTrace();
         }
     }
 
-    //java <3
-
-
-
-    public void save(Connection conn) {
-
-    }
-
-
-
-   /* @Override
-    public void initialize(Connection conn) {
-
-    }
-
     @Override
-    public void refresh(Connection conn) {
+    public void list(Connection conn) {
+        // Not used here
     }
 
-    @Override
-    public void save(Connection conn) {
-    }*/
 }

@@ -6,7 +6,7 @@ public class ExerciseWithoutMachine extends Exercise {
 
     private String description;
 
-    public ExerciseWithoutMachine(String eName, int performance, String description) {
+    ExerciseWithoutMachine(String eName, int performance, String description) {
         super(eName, performance);
         this.description = description;
     }
@@ -14,7 +14,7 @@ public class ExerciseWithoutMachine extends Exercise {
     @Override
     public void save(Connection conn) {  //Lagrer machineexercise
         try {
-            createExercise(conn);
+            super.save(conn);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO ExerciseWithoutMachine VALUES (?, ?)");
             stmt.setInt(1, exerciseID);
             stmt.setString(2, description);
