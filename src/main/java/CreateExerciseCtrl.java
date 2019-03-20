@@ -1,3 +1,8 @@
+import models.Exercise;
+import models.ExerciseWithoutMachine;
+import models.Machine;
+import models.MachineExercise;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 

@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.Connection;
 
 public abstract class ActiveDomainObject {
