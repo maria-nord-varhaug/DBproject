@@ -1,11 +1,14 @@
+import models.Exercise;
+import models.Workout;
+
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WorkoutCtrl extends DBConn {
-    //private Workout workout;
 
     public WorkoutCtrl() {
         connect();
@@ -17,14 +20,11 @@ public class WorkoutCtrl extends DBConn {
         }
     }
 
-    private void createWorkout(Date workoutDate, Time workoutTime, int duration, int personalShape, String note, List<Exercise> exercises) {
-        //workout = new Workout(workoutDate, workoutTime, duration, personalshape, note, exercises);
-    }
 
     public static void main(String[] args) {
-        //WorkoutCtrl wc = new WorkoutCtrl();
-        //wc.addWorkout();
-
+        Scanner scanner = new Scanner(System.in);
+        WorkoutCtrl wc = new WorkoutCtrl();
+        wc.addWorkout(scanner);
     }
 
     public void addWorkout(Scanner scanner) {
@@ -33,6 +33,9 @@ public class WorkoutCtrl extends DBConn {
         int duration;
         int personalshape;
         String note;
+        String answer;
+        List<Exercise> exerciseList = new ArrayList<Exercise>();
+
         System.out.println("Okay, what date did you perform the workout you want to log? Write it in format yyyy-MM-dd");
         System.out.println("Example: 2019-02-01");
         date = java.sql.Date.valueOf(scanner.nextLine());
@@ -44,19 +47,30 @@ public class WorkoutCtrl extends DBConn {
         personalshape = scanner.nextInt();
         System.out.println("Do you have any additional comments you want to add?");
         note = scanner.nextLine();
-        //List<Exercise> exerciseList = new ArrayList<Exercise>();
-        //createWorkout(date, time, duration, personalshape, note, exerciseList);
+        note = scanner.nextLine();
 
-        String querystring = "Did you do any exercises you want to log? If you do write 'Y'";
-        System.out.println(querystring);
-        //System.out.println(date.toString()+time.toString()+duration+personalshape+note); //test
-        String answer = scanner.nextLine();
+        Workout workout = new Workout(date, time, duration, personalshape, note, exerciseList);
+        workout.createWorkout(conn);
+
+        System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
+        answer = scanner.nextLine();
+
+        CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
 
         while (answer.equals("Y")) {
-
-
-            System.out.println(querystring);
+            exerciseList.add(exerciseCtrl.addExercise(scanner));
+            System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
             answer = scanner.nextLine();
         }
+        try {
+            conn.commit();
+        } catch (Exception e) {
+            System.out.println("problem commiting stuff=" + e);
+        }
+
+        System.out.println("All clear!");
+        scanner.close();
+
+
     }
 }
