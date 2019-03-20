@@ -1,19 +1,16 @@
-/*Etter at active domain object er lagt, så HUSK å la Workout klassen extende ActiveDomainObject*/
-
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 import java.util.List;
 
 
-public class Workout {
+public class Workout extends ActiveDomainObject {
 
     //Variabler som vi også har i sql filen
     private int workoutID;
     private Date workoutDate;
     private Time workoutTime;
     private int duration;
-    private int personalShape;
     private int performance;
+    private int personalShape;
     private String note;
 
 
@@ -26,9 +23,29 @@ public class Workout {
         this.workoutTime = workoutTime;
         this.duration = duration;
         this.personalShape = personalShape;
-        this.performance = performance;
         this.note = note;
         this.exercises = exercises;
+    }
+
+
+    public void createWorkout(Connection conn) {
+        try {
+            PreparedStatement stmt;
+            stmt = conn.prepareStatement("INSERT INTO Workout(WDate, WTime, Duration, PersonalShape, Note) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
+            stmt.setDate(1, workoutDate);
+            stmt.setTime(2, workoutTime);
+            stmt.setInt(3, duration);
+            stmt.setInt(4, personalShape);
+            stmt.setString(6, note);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            workoutID = rs.getInt(1);
+            System.out.println(workoutID);
+        } catch (Exception e) {
+            System.out.println("Failed to create workout=" + e);
+        }
     }
 
     //Metoder nødvendig for usecasene
@@ -54,10 +71,6 @@ public class Workout {
         return personalShape;
     }
 
-    public int getPerformance() {
-        return performance;
-    }
-
     public List<Exercise> getExercises() {
         return exercises;
     }
@@ -67,6 +80,10 @@ public class Workout {
     }
 
     public void removeExercise(Exercise exercise){ exercises.remove(exercise);}
+
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
 
     public void setWorkoutDate(Date workoutDate) {
         this.workoutDate = workoutDate;
@@ -84,11 +101,19 @@ public class Workout {
         this.personalShape = personalShape;
     }
 
-    public void setPerformance(int performance){
-        this.performance = performance;
-    }
-
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public void initialize(Connection conn) {
+
+    }
+
+    public void refresh(Connection conn) {
+
+    }
+
+    public void save(Connection conn) {
+
     }
 }
