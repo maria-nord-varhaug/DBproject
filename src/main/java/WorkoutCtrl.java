@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WorkoutCtrl extends DBConn {
-    private Scanner scanner;
     //private Workout workout;
 
     public WorkoutCtrl() {
@@ -16,7 +15,6 @@ public class WorkoutCtrl extends DBConn {
             System.out.println("db error during setAuoCommit of LagAvtaleCtrl=" + e);
             return;
         }
-        this.scanner = new Scanner(System.in);
     }
 
     private void createWorkout(Date workoutDate, Time workoutTime, int duration, int personalShape, String note, List<Exercise> exercises) {
@@ -24,12 +22,12 @@ public class WorkoutCtrl extends DBConn {
     }
 
     public static void main(String[] args) {
-        WorkoutCtrl wc = new WorkoutCtrl();
-        wc.addWorkout();
+        //WorkoutCtrl wc = new WorkoutCtrl();
+        //wc.addWorkout();
 
     }
 
-    public void addWorkout() {
+    public void addWorkout(Scanner scanner) {
         Date date;
         Time time;
         int duration;
@@ -55,7 +53,8 @@ public class WorkoutCtrl extends DBConn {
         String answer = scanner.nextLine();
 
         while (answer.equals("Y")) {
-            //TODO: create exercise
+
+
             System.out.println(querystring);
             answer = scanner.nextLine();
         }
