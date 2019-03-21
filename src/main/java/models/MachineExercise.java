@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 
 public class MachineExercise extends Exercise {
 
-    private int workoutMachineID;
+    private int machineID;
     private int kg;
     private int sets;
 
@@ -13,7 +13,7 @@ public class MachineExercise extends Exercise {
         super(eName, performance);
         this.kg = kg;
         this.sets = sets;
-        this.workoutMachineID = machine.getMachineID();
+        this.machineID = machine.getMachineID();
     }
 
     @Override
@@ -21,12 +21,12 @@ public class MachineExercise extends Exercise {
         try {
             super.save(conn);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Machineexercise VALUES (?, ?, ?, ?)");
+            System.out.println("exerciseID: " + exerciseID + "\nkg: " + kg + "\nsets: " + sets + "\nmachineID: " + machineID);
             stmt.setInt(1, exerciseID);
             stmt.setInt(2, kg);
             stmt.setInt(3, sets);
-            stmt.setInt(4, workoutMachineID);
+            stmt.setInt(4, machineID);
             stmt.execute();
-            conn.commit();
         } catch (Exception e) {
             System.out.println("DB error during insert of machineexercise=" + e);
         }

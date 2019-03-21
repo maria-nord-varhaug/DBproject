@@ -19,11 +19,6 @@ public class Machine extends ActiveDomainObject {
         return machineID;
     }
 
-    public void setMachineID(int machineID) {
-        this.machineID = machineID;
-    }
-
-
     public void initialize(Connection conn) {
 
     }
@@ -34,17 +29,20 @@ public class Machine extends ActiveDomainObject {
 
     public void save(Connection conn) {
         try {
-            PreparedStatement stmt;
-            stmt = conn.prepareStatement("INSERT INTO Machine(MDescription, Name) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, mDescription);
-            stmt.setString(2, name);
-            stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            rs.next();
-            machineID = rs.getInt(1);
-            System.out.println(machineID);
+            PreparedStatement hjelp;
+            hjelp = conn.prepareStatement("INSERT INTO Machine(MDescription, Name) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+            hjelp.setString(1, mDescription);
+            hjelp.setString(2, name);
+            hjelp.executeUpdate();
+            conn.commit();
+            ResultSet resultatset = hjelp.getGeneratedKeys();
+            resultatset.next();
+
+            machineID = resultatset.getInt(1);
+            //System.out.println(machineID);
         } catch (Exception e) {
-            System.out.println("Failed to create exercise=" + e);
+            System.out.println("Failed to create/update machine=" + e);
+            e.printStackTrace();
         }
     }
 
