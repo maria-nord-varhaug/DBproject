@@ -32,7 +32,6 @@ public class WorkoutCtrl extends DBConn {
         int duration;
         int personalshape;
         String note;
-        String answer;
         List<Exercise> exerciseList = new ArrayList<Exercise>();
 
         System.out.println("Okay, what date did you perform the workout you want to log? Write it in format yyyy-MM-dd");
@@ -53,18 +52,16 @@ public class WorkoutCtrl extends DBConn {
 
 
         System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
-        answer = scanner.nextLine();
-        CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
-
-        while (answer.equals("Y")) {
-            //exerciseList.add(exerciseCtrl.addExercise(scanner));
-            int exerciseID = exerciseCtrl.addExercise(scanner).getExerciseID();  //prøver å lage øvelsene først
-            workout.createWorkoutExerciseConnection(conn, exerciseID);
-            System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
-            answer = scanner.nextLine();
+        String answer = scanner.nextLine();
+        if (answer.equals("Y")) {
+            CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
+            System.out.println("How many exercises do you want to log?");
+            int ans = scanner.nextInt();
+            for (int i = 0; i < ans; i++) {
+                int exerciseID = exerciseCtrl.addExercise(scanner).getExerciseID();  //prøver å lage øvelsene først
+                workout.createWorkoutExerciseConnection(conn, exerciseID);
+            }
         }
-
-
         try {
             conn.commit();
         } catch (Exception e) {

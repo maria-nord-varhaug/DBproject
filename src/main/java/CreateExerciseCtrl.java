@@ -71,6 +71,8 @@ public class CreateExerciseCtrl extends DBConn {
         String s;
         System.out.println("If you want to log an exercise with machine write 'machine', else write 'body': ");
         s = scanner.nextLine();
+        System.out.println("");
+        s = scanner.nextLine();
         if (s.equals("machine")) {
             return addMachineExercise(scanner);
         } else {
