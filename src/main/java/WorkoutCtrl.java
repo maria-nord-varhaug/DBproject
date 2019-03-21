@@ -84,7 +84,7 @@ public class WorkoutCtrl extends DBConn {
             System.out.println("Write 'last' if you want to see recent workouts you've done");
             System.out.println("or 'result' if you want to see how well you have performed in the same exercise over a specific time interval");
             System.out.println("Or 'favorite' if you want to see the most done exercise in an exercisecategory ");
-            System.out.println("or 'cool' if you want to see all exercises in a specific exercisegroup");
+            System.out.println("or 'list' if you want to see all exercises in a specific exercisegroup");
             toughchoice = scanner.nextLine();
             if (toughchoice.equals("last")) {
                 System.out.println("How many workouts do you want to view?");
@@ -103,10 +103,11 @@ public class WorkoutCtrl extends DBConn {
                 System.out.println("Which exercisecategory do you want to see stuff in? ");
                 int catID = scanner.nextInt();
                 Exercise.task5(conn, catID);
-            } else if (toughchoice.equals("cool")) {
-                System.out.println("Which exercisecategory do you want to see stuff in? ");
+            } else if (toughchoice.equals("list")) {
+                ExerciseCategory.listCategories(conn);
+                System.out.println("Which exercisecategory do you want to see stuff in? (write ID): ");
                 int catID = scanner.nextInt();
-                ExerciseCategory.cool(conn, catID);
+                ExerciseCategory.listExInCat(conn, catID);
             }
             scanner.close();
         }

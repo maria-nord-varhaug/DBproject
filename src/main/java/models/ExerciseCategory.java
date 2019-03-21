@@ -103,7 +103,7 @@ public class ExerciseCategory extends ActiveDomainObject {
 
     }
 
-    public static void cool(Connection conn, int categoryID) {
+    public static void listExInCat(Connection conn, int categoryID) {
         try {
             Statement spm = conn.createStatement();
             ResultSet rs = spm.executeQuery("SELECT EName FROM exercise NATURAL JOIN exerciseincategory WHERE exercisecategoryID = " + categoryID);
