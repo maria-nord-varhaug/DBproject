@@ -52,7 +52,7 @@ public class WorkoutCtrl extends DBConn {
 
 
         System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
-        String answer = scanner.nextLine();
+        String answer = scanner.nextLine().toUpperCase();
         if (answer.equals("Y")) {
             CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
             System.out.println("How many exercises do you want to log?");

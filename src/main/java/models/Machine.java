@@ -39,7 +39,7 @@ public class Machine extends ActiveDomainObject {
             resultatset.next();
 
             machineID = resultatset.getInt(1);
-            System.out.println(machineID);
+            //System.out.println(machineID);
         } catch (Exception e) {
             System.out.println("Failed to create/update machine=" + e);
             e.printStackTrace();

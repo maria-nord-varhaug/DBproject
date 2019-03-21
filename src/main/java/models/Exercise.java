@@ -48,7 +48,7 @@ public class Exercise extends ActiveDomainObject {
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             exerciseID = rs.getInt(1);
-            System.out.println(exerciseID);
+            //System.out.println(exerciseID);
         } catch (Exception e) {
             System.out.println("Failed to create/update exercise=" + e);
             e.printStackTrace();
