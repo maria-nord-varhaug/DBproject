@@ -1,9 +1,6 @@
 package models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ExerciseCategory extends ActiveDomainObject {
 
@@ -16,12 +13,16 @@ public class ExerciseCategory extends ActiveDomainObject {
     private String name;
     private int exerciseCategoryID;
 
-    public ExerciseCategory(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     public void setExerciseCategoryID(int exerciseCategoryID) {
         this.exerciseCategoryID = exerciseCategoryID;
+    }
+
+    public int getExerciseCategoryID() {
+        return exerciseCategoryID;
     }
 
     @Override
@@ -80,6 +81,21 @@ public class ExerciseCategory extends ActiveDomainObject {
         } catch (Exception e) {
             System.out.println("there was a problem fetching workouts=" + e);
         }
+    }
+
+    public void createExCatConnection(Connection conn, int exID, int catID) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO exerciseincategory(ExerciseID, ExerciseCategoryID) " +
+                    "VALUES(?, ?);");
+            stmt.setInt(1, exID);
+            stmt.setInt(2, catID);
+            stmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            System.err.println("Could not insert exercise into category");
+            e.printStackTrace();
+        }
+
     }
 
     @Override

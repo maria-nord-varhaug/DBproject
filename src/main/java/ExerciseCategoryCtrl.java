@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ExerciseCategoryCtrl extends DBConn{
     private Scanner scanner;
-    private ExerciseCategory ec;
+    private ExerciseCategory ec = new ExerciseCategory();
 
     public ExerciseCategoryCtrl() {
         connect();
@@ -21,22 +21,30 @@ public class ExerciseCategoryCtrl extends DBConn{
         String name;
         System.out.println("What is the name of the exercise category?");
         name = scanner.nextLine();
-        ExerciseCategory newEC = new ExerciseCategory(name);
+        ExerciseCategory newEC = new ExerciseCategory();
+        newEC.setName(name);
         newEC.save(conn);
         return newEC;
     }
 
-    public void addExerciseToCategory(Scanner scanner) {
+    public void addExerciseToCategory(Scanner scanner, int exerciseID) {
         String s;
         System.out.println("Here are the existing categories: ");
-        ec.listCategories(conn);
+        ExerciseCategory.listCategories(conn);
         System.out.println("What category should the exercise be in?");
         System.out.println("If you want to make a new category, write 'y', else 'n': ");
         s = scanner.nextLine();
-        /*if (s.equals("y")) {
+        int categoryID;
+        if (s.equals("y")) {
             ec = addCategory(scanner);
+            categoryID = ec.getExerciseCategoryID();
         } else {
+            System.out.println("Which category do you want to add the exercise to (write ID): ");
+            categoryID = Integer.parseInt(scanner.nextLine());
+            System.out.println("catID: " + categoryID);
 
-        }*/
+        }
+        ec.createExCatConnection(conn, exerciseID, categoryID);
+
     }
 }

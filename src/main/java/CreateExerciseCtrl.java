@@ -80,15 +80,6 @@ public class CreateExerciseCtrl extends DBConn {
         }
     }
 
-    public void addExerciseToCategory(Scanner scanner) {
-        String s;
-        System.out.println("If you want to make a new category, write 'y', else 'n': ");
-        s = scanner.nextLine();
-        if (s.equals("y")) {
-
-        }
-    }
-
     public static void main(String[] args) {
         //Scanner scanner = new Scanner(System.in);
         //CreateExerciseCtrl ec = new CreateExerciseCtrl();
