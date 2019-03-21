@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ExerciseCategory {
+public class ExerciseCategory extends ActiveDomainObject {
 
 /*CREATE TABLE models.ExerciseCategory(
 	ExerciseCategoryID INTEGER NOT NULL AUTO_INCREMENT,
@@ -16,12 +16,22 @@ public class ExerciseCategory {
     private String name;
     private int exerciseCategoryID;
 
-    public ExerciseCategory(String n){
-        this.name=n;
+    public ExerciseCategory(String name) {
+        this.name = name;
     }
 
-    public void setExerciseCategoryID(int ecid){
-        this.exerciseCategoryID=ecid;
+    public void setExerciseCategoryID(int exerciseCategoryID) {
+        this.exerciseCategoryID = exerciseCategoryID;
+    }
+
+    @Override
+    public void initialize(Connection conn) {
+
+    }
+
+    @Override
+    public void refresh(Connection conn) {
+
     }
 
     public void save(Connection conn){
@@ -39,6 +49,12 @@ public class ExerciseCategory {
         } catch (Exception e) {
             System.out.println("Failed to create exercise category = "+e);
         }
+
+
+    }
+
+    @Override
+    public void list(Connection conn) {
 
     }
 

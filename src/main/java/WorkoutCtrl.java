@@ -59,6 +59,7 @@ public class WorkoutCtrl extends DBConn {
             int ans = scanner.nextInt();
             for (int i = 0; i < ans; i++) {
                 int exerciseID = exerciseCtrl.addExercise(scanner).getExerciseID();  //prøver å lage øvelsene først
+
                 workout.createWorkoutExerciseConnection(conn, exerciseID);
             }
         }
