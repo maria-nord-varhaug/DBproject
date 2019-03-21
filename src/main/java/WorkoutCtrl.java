@@ -61,7 +61,13 @@ public class WorkoutCtrl extends DBConn {
             int ans = scanner.nextInt();
             for (int i = 0; i < ans; i++) {
                 int exerciseID = exerciseCtrl.addExercise(scanner).getExerciseID();  //prøver å lage øvelsene først
-                exCatCtrl.addExerciseToCategory(scanner, exerciseID);
+                System.out.println("Write 'Y' if you want to add this exercise to a category");
+                String reply = scanner.nextLine();
+                System.out.println("");
+                reply = scanner.nextLine();
+                if (reply.toUpperCase().equals("Y")) {
+                    exCatCtrl.addExerciseToCategory(scanner, exerciseID);
+                }
                 workout.createWorkoutExerciseConnection(conn, exerciseID);
             }
         }
