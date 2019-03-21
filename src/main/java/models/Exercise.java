@@ -55,9 +55,21 @@ public class Exercise extends ActiveDomainObject {
         }
     }
 
+    public static void task5(Connection conn, int categoryID) {
+        try {
+            Statement spm = conn.createStatement();
+            ResultSet rs = spm.executeQuery("SELECT EName FROM exercise NATURAL JOIN exerciseincategory WHERE exercisecategoryid = " + categoryID + " GROUP BY EName HAVING COUNT(EName)=(SELECT MAX(ENamecount) FROM (SELECT EName, COUNT(EName) AS ENamecount FROM exercise NATURAL JOIN exerciseincategory GROUP BY EName) AS tab );");
+            rs.next();
+            String name = rs.getString(1);
+            System.out.println("Hey the exercise in category " + categoryID + " that has been done the most times is: " + name);
+        } catch (Exception e) {
+            System.out.println("something went wring with query5=" + e);
+        }
+    }
+
     @Override
     public void list(Connection conn) {
-        // Not used here
     }
+
 
 }
