@@ -81,9 +81,9 @@ public class CreateExerciseCtrl extends DBConn {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CreateExerciseCtrl ec = new CreateExerciseCtrl();
-        ec.addExercise(scanner);
+        //Scanner scanner = new Scanner(System.in);
+        //CreateExerciseCtrl ec = new CreateExerciseCtrl();
+        //ec.addExercise(scanner);
     }
 
 }
