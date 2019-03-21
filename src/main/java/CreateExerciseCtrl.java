@@ -20,17 +20,6 @@ public class CreateExerciseCtrl extends DBConn {
         }
     }
 
-
-    private Exercise createMachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
-        Exercise exercise = new MachineExercise(eName, performance, kg, sets, machine);
-        return exercise;
-    }
-
-    private Exercise createExerciseWithoutMachine(String eName, int performance, String description) {
-        Exercise exercise = new ExerciseWithoutMachine(eName, performance, description);
-        return exercise;
-    }
-
     private Exercise addMachineExercise(Scanner scanner) {
         String machinename;
         String description;
@@ -55,8 +44,8 @@ public class CreateExerciseCtrl extends DBConn {
         sets = scanner.nextInt();
 
         machine = new Machine(machinename, description);
-        exercise = createMachineExercise(eName, performance, kg, sets, machine);
         machine.save(conn);
+        exercise = new MachineExercise(eName, performance, kg, sets, machine);
         exercise.save(conn);  //Adds exercise's subclasses to DB
         return exercise;
     }
@@ -73,7 +62,7 @@ public class CreateExerciseCtrl extends DBConn {
         System.out.println("On a scale from 1 to 10, how well did you feel you performed?");
         performance = scanner.nextInt();
 
-        exercise = createExerciseWithoutMachine(eName, performance, description);
+        exercise = new ExerciseWithoutMachine(eName, performance, description);
         exercise.save(conn);
         return exercise;
     }
