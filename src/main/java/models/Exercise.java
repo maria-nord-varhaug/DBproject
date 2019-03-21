@@ -20,6 +20,9 @@ public class Exercise extends ActiveDomainObject {
 
     }
 
+    public int getExerciseID() {
+        return exerciseID;
+    }
 
     @Override
     public void initialize(Connection conn) {

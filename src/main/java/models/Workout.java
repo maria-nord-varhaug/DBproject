@@ -49,10 +49,24 @@ public class Workout extends ActiveDomainObject {
         }
     }
 
+    public void createWorkoutExerciseConnection(Connection conn, int exerciseID) {
+        try {
+            PreparedStatement stmt;
+            stmt = conn.prepareStatement("INSERT INTO workoutexercise VALUES (?,?)");
+            stmt.setInt(1, exerciseID);
+            stmt.setInt(2, this.workoutID);
+            stmt.executeUpdate();
+            conn.commit();
+        } catch (Exception e) {
+            System.out.println("failed to insert into workoutexercise");
+        }
+    }
+
     //Metoder nødvendig for usecasene
     public String getNote(){ return note; }
 
     public int getWorkoutID() {
+
         return workoutID;
     }
 
