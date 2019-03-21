@@ -32,8 +32,8 @@ public class CreateExerciseCtrl extends DBConn {
     }
 
     public static void main(String[] args) {
-        CreateExerciseCtrl cec = new CreateExerciseCtrl();
-        cec.addExercise();
+        //CreateExerciseCtrl cec = new CreateExerciseCtrl();
+        //cec.addExercise();
     }
 
     public void addExercise() {
