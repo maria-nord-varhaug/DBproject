@@ -77,7 +77,7 @@ public class WorkoutCtrl extends DBConn {
     public void pickYourChoose(Scanner scanner) {
         System.out.println("Write 'w' for logging a workout, or type whatever for fetching information from db");
         String toughchoice = scanner.nextLine();
-        if (toughchoice.equals('w')) {
+        if (toughchoice.equals("w")) {
             addWorkout(scanner);
         } else {
             System.out.println("Write 'last' if you want to see recent workouts you've done");
