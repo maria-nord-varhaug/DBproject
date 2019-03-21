@@ -26,7 +26,7 @@ public class WorkoutCtrl extends DBConn {
         wc.addWorkout(scanner);
     }
 
-    public void addWorkout(Scanner scanner) {
+    private void addWorkout(Scanner scanner) {
         Date date;
         Time time;
         int duration;
@@ -70,6 +70,32 @@ public class WorkoutCtrl extends DBConn {
 
         System.out.println("All clear!");
         scanner.close();
+    }
+
+    public void pickYourChoose(Scanner scanner) {
+        System.out.println("Write 'w' for logging a workout, else you will be directed to show stuff");
+        String toughchoice = scanner.nextLine();
+        if (toughchoice.equals('w')) {
+            addWorkout(scanner);
+        } else {
+            System.out.println("Write 'last' if you want to see recent workouts you've done, or 'result' if you want to see how well you have performed in the same exercise over a specific time interval");
+            toughchoice = scanner.nextLine();
+            if (toughchoice.equals("last")) {
+                System.out.println("How many workouts do you want to view?");
+                int number = scanner.nextInt();
+                Workout.viewWorkouts(conn, number);
+            } else if (toughchoice.equals("result")) {
+                System.out.println("What is the name of the exercise you want to look at?");
+                String exercisename = scanner.nextLine();
+                System.out.println("What is the date of the start of the time interval you want to look at?");
+                System.out.println("Format is: yyyy-mm-dd, for example: 1998-02-02 or 1998-05-01");
+                Date startdate = java.sql.Date.valueOf(scanner.nextLine());
+                System.out.println("What is the date of the end of the time interval you want to look at?");
+                Date enddate = java.sql.Date.valueOf(scanner.nextLine());
+
+                Workout.viewExerciseResult(conn, exercisename, startdate, enddate);
+            }
+        }
     }
 
 
