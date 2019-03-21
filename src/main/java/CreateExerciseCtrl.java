@@ -3,11 +3,12 @@ import models.ExerciseWithoutMachine;
 import models.Machine;
 import models.MachineExercise;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
 public class CreateExerciseCtrl extends DBConn {
-    /*
+
     //Ha dette i en supercontroller?
     public CreateExerciseCtrl() {
         connect();
@@ -18,7 +19,7 @@ public class CreateExerciseCtrl extends DBConn {
             return;
         }
     }
-    */
+
 
     private Exercise createMachineExercise(String eName, int performance, int kg, int sets, Machine machine) {
         Exercise exercise = new MachineExercise(eName, performance, kg, sets, machine);
@@ -86,6 +87,12 @@ public class CreateExerciseCtrl extends DBConn {
         } else {
             return addExerciseWithoutMachine(scanner);
         }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        CreateExerciseCtrl ec = new CreateExerciseCtrl();
+        ec.addExercise(scanner);
     }
 
 }

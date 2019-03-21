@@ -20,7 +20,6 @@ public class WorkoutCtrl extends DBConn {
         }
     }
 
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         WorkoutCtrl wc = new WorkoutCtrl();
@@ -52,16 +51,20 @@ public class WorkoutCtrl extends DBConn {
         Workout workout = new Workout(date, time, duration, personalshape, note, exerciseList);
         workout.createWorkout(conn);
 
-        System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
+        CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
+        exerciseCtrl.addExercise(scanner);
+
+
+        /*System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
         answer = scanner.nextLine();
 
-        CreateExerciseCtrl exerciseCtrl = new CreateExerciseCtrl();
 
         while (answer.equals("Y")) {
-            exerciseList.add(exerciseCtrl.addExercise(scanner));
+            //exerciseList.add(exerciseCtrl.addExercise(scanner));
+            exerciseCtrl.addExercise(scanner);  //prøver å lage øvelsene først
             System.out.println("Did you do any exercises you want to log? If you do write 'Y'");
             answer = scanner.nextLine();
-        }
+        }*/
         try {
             conn.commit();
         } catch (Exception e) {
@@ -70,7 +73,7 @@ public class WorkoutCtrl extends DBConn {
 
         System.out.println("All clear!");
         scanner.close();
-
-
     }
+
+
 }
