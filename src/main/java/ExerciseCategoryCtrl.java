@@ -1,5 +1,4 @@
 import models.ExerciseCategory;
-
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -18,13 +17,11 @@ public class ExerciseCategoryCtrl extends DBConn{
         this.scanner = new Scanner(System.in);
     }
 
-    private void createCategory(String name){
-        ec=new ExerciseCategory(name);
-    }
-
     private void addCategory(){
         String name;
-
-
+        System.out.println("Hva er navnet på øvelseskategorien?");
+        name = scanner.nextLine();
+        ExerciseCategory ec = new ExerciseCategory(name);
+        ec.save(conn);
     }
 }
