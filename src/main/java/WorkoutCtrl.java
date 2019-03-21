@@ -73,12 +73,14 @@ public class WorkoutCtrl extends DBConn {
     }
 
     public void pickYourChoose(Scanner scanner) {
-        System.out.println("Write 'w' for logging a workout, else you will be directed to show stuff");
+        System.out.println("Write 'w' for logging a workout, or type whatever for fetching information from db");
         String toughchoice = scanner.nextLine();
         if (toughchoice.equals('w')) {
             addWorkout(scanner);
         } else {
-            System.out.println("Write 'last' if you want to see recent workouts you've done, or 'result' if you want to see how well you have performed in the same exercise over a specific time interval");
+            System.out.println("Write 'last' if you want to see recent workouts you've done");
+            System.out.println("or 'result' if you want to see how well you have performed in the same exercise over a specific time interval");
+            System.out.println("Or 'favorite' if you want to see the most done exercise in an exercisecategory ");
             toughchoice = scanner.nextLine();
             if (toughchoice.equals("last")) {
                 System.out.println("How many workouts do you want to view?");
@@ -92,8 +94,11 @@ public class WorkoutCtrl extends DBConn {
                 Date startdate = java.sql.Date.valueOf(scanner.nextLine());
                 System.out.println("What is the date of the end of the time interval you want to look at?");
                 Date enddate = java.sql.Date.valueOf(scanner.nextLine());
-
                 Workout.viewExerciseResult(conn, exercisename, startdate, enddate);
+            } else if (toughchoice.equals("favorite")) {
+                System.out.println("Which exercisecategory do you want to see stuff in? ");
+                int catID = scanner.nextInt();
+                Exercise.task5(conn, catID);
             }
         }
     }
