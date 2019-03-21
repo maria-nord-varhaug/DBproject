@@ -30,6 +30,7 @@ public class ExerciseCategory {
             stmt = conn.prepareStatement("INSERT INTO ExerciseCategory(ECName) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1,name);
             stmt.executeUpdate();
+            conn.commit();
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
