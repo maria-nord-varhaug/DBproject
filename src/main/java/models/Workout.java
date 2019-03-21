@@ -15,6 +15,7 @@ public class Workout extends ActiveDomainObject {
     private String note;
 
 
+
     //Variabler nødvendige for usecasene. kommer itilegg til sql variablene
     private List<Exercise> exercises;
 
@@ -59,6 +60,65 @@ public class Workout extends ActiveDomainObject {
             conn.commit();
         } catch (Exception e) {
             System.out.println("failed to insert into workoutexercise");
+        }
+    }
+
+    public static void viewWorkouts(Connection conn, int n) {
+        try {
+            Object[][] table;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select workoutid, note, wdate, wtime from workout order by wdate desc, wtime desc limit " + n);
+            table = new String[n + 1][4];
+            table[0] = new String[]{"workoutid:", "note:", "workoutdate: ", "workouttime: "};
+            int index = 1;
+
+            while (rs.next()) {
+                String workoutid = Integer.toString(rs.getInt("workoutid"));
+                String note = rs.getString("note");
+                String wdate = rs.getDate("wdate").toString();
+                String wtime = rs.getTime("wtime").toString();
+                table[index] = new String[]{workoutid, note, wdate, wtime};
+                System.out.println(index);
+                index++;
+            }
+
+            for (Object[] row : table) {
+                System.out.format("%15s%15s%15s%15s\n", row);
+            }
+        } catch (Exception e) {
+            System.out.println("there was a problem fetching workouts=" + e);
+        }
+    }
+
+    public static void viewExerciseResult(Connection conn, String exercisename, Date startdate, Date enddate) {
+        try {
+
+            Statement testerino = conn.createStatement();
+            ResultSet heiho = testerino.executeQuery("select COUNT(*) wdate from workout inner join workoutexercise on workout.WorkoutID = workoutexercise.WorkoutID natural join exercise where wdate<=\"" + enddate + "\" and wdate>=\"" + startdate + "\" and ename = \"" + exercisename + "\";");
+            heiho.next();
+            int antallting = heiho.getInt(1);
+
+            Object[][] table;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("select wdate, performance from workout inner join workoutexercise on workout.WorkoutID = workoutexercise.WorkoutID natural join exercise where wdate<=\"" + enddate + "\" and wdate>=\"" + startdate + "\" and ename = \"" + exercisename + "\";");
+
+            table = new String[antallting + 1][];
+            table[0] = new String[]{"workoutdate:", "performance:"};
+            int index = 1;
+
+            while (rs.next()) {
+                String wdate = rs.getDate("wdate").toString();
+                String performance = Integer.toString(rs.getInt("performance"));
+                table[index] = new String[]{wdate, performance};
+                System.out.println(index);
+                index++;
+            }
+
+            for (Object[] row : table) {
+                System.out.format("%15s%15s\n", row);
+            }
+        } catch (Exception e) {
+            System.out.println("something is wrong when fetching data from resultthing=" + e);
         }
     }
 

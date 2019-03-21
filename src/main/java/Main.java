@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CreateExerciseCtrl ec = new CreateExerciseCtrl();
-        ec.addExercise(scanner);
+        WorkoutCtrl wc = new WorkoutCtrl();
+        wc.pickYourChoose(scanner);
     }
 }
