@@ -11,7 +11,6 @@ public class Workout extends ActiveDomainObject {
     private Date workoutDate;
     private Time workoutTime;
     private int duration;
-    private int performance;
     private int personalShape;
     private String note;
 
@@ -20,7 +19,7 @@ public class Workout extends ActiveDomainObject {
     private List<Exercise> exercises;
 
 
-    public Workout(Date workoutDate, Time workoutTime, int duration, int personalShape, int performance, String note, List<Exercise> exercises) {
+    public Workout(Date workoutDate, Time workoutTime, int duration, int personalShape, String note, List<Exercise> exercises) {
         this.workoutDate = workoutDate;
         this.workoutTime = workoutTime;
         this.duration = duration;
@@ -28,7 +27,6 @@ public class Workout extends ActiveDomainObject {
         this.note = note;
         this.exercises = exercises;
     }
-
 
     public void createWorkout(Connection conn) {
         try {
@@ -39,7 +37,8 @@ public class Workout extends ActiveDomainObject {
             stmt.setTime(2, workoutTime);
             stmt.setInt(3, duration);
             stmt.setInt(4, personalShape);
-            stmt.setString(6, note);
+            stmt.setString(5, note);
+            stmt.executeUpdate();  //Why is this duplicate it isn't here at all wtf
 
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -50,10 +49,24 @@ public class Workout extends ActiveDomainObject {
         }
     }
 
+    public void createWorkoutExerciseConnection(Connection conn, int exerciseID) {
+        try {
+            PreparedStatement stmt;
+            stmt = conn.prepareStatement("INSERT INTO workoutexercise VALUES (?,?)");
+            stmt.setInt(1, exerciseID);
+            stmt.setInt(2, this.workoutID);
+            stmt.executeUpdate();
+            conn.commit();
+        } catch (Exception e) {
+            System.out.println("failed to insert into workoutexercise");
+        }
+    }
+
     //Metoder nødvendig for usecasene
     public String getNote(){ return note; }
 
     public int getWorkoutID() {
+
         return workoutID;
     }
 

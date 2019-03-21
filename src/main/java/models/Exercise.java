@@ -20,6 +20,9 @@ public class Exercise extends ActiveDomainObject {
 
     }
 
+    public int getExerciseID() {
+        return exerciseID;
+    }
 
     @Override
     public void initialize(Connection conn) {
@@ -39,6 +42,7 @@ public class Exercise extends ActiveDomainObject {
             stmt.setString(1, eName);
             stmt.setInt(2, performance);
             stmt.executeUpdate();
+            conn.commit();
 
             //This fetches the newly inserted ID :))
             ResultSet rs = stmt.getGeneratedKeys();
