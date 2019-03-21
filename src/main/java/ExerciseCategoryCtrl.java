@@ -1,4 +1,5 @@
 import models.ExerciseCategory;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -14,10 +15,9 @@ public class ExerciseCategoryCtrl extends DBConn{
             System.out.println("db error during setAuoCommit of LagAvtaleCtrl=" + e);
             return;
         }
-        this.scanner = new Scanner(System.in);
     }
 
-    private void addCategory(){
+    public void addCategory(Scanner scanner) {
         String name;
         System.out.println("Hva er navnet på øvelseskategorien?");
         name = scanner.nextLine();
