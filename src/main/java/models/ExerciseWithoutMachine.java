@@ -17,6 +17,7 @@ public class ExerciseWithoutMachine extends Exercise {
     public void save(Connection conn) {  //Lagrer machineexercise
         try {
             super.save(conn);
+            //System.out.println("exercise id: " + exerciseID);
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO ExerciseWithoutMachine VALUES (?, ?)");
             stmt.setInt(1, exerciseID);
             stmt.setString(2, description);

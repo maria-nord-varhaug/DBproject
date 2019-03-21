@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public abstract class DBConn {
 
@@ -18,13 +19,19 @@ public abstract class DBConn {
 
     public void connect() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();    //Format: IP:portnumber/dbname
-            //I have a database called workoutournal
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workoutjournal?autoReconnect=true&allowPublicKeyRetrieval=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
+            //I have a database called workoutournal. Format: IP:portnumber/dbname
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/workoutjournal" +
+                            "?autoReconnect=true" +
+                            "&allowPublicKeyRetrieval=true" +
+                            "&useUnicode=true" +
+                            "&useJDBCCompliantTimezoneShift=true" +
+                            "&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                    username, password);
             System.out.println("Database connected!");
 
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to connect", e);
+
+        } catch (SQLException sqlE) {
+            throw new RuntimeException("Unable to connect", sqlE);
         }
     }
 
