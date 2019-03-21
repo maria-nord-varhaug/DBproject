@@ -53,6 +53,35 @@ public class ExerciseCategory extends ActiveDomainObject {
 
     }
 
+    public static void listCategories(Connection conn) {
+        try {
+            Object[][] table;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) catNumber FROM exercisecategory;");
+            rs.next();
+            int number = rs.getInt(1);
+
+            rs = stmt.executeQuery("SELECT * FROM exercisecategory;");
+            table = new String[number + 1][4];
+            table[0] = new String[]{"categoryID:", "name:"};
+            int index = 1;
+
+            while (rs.next()) {
+                String categoryID = Integer.toString(rs.getInt("ExerciseCategoryID"));
+                String name = rs.getString("ECName");
+                table[index] = new String[]{categoryID, name};
+                System.out.println(index);
+                index++;
+            }
+
+            for (Object[] row : table) {
+                System.out.format("%15s%15s\n", row);
+            }
+        } catch (Exception e) {
+            System.out.println("there was a problem fetching workouts=" + e);
+        }
+    }
+
     @Override
     public void list(Connection conn) {
 

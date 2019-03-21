@@ -26,23 +26,17 @@ public class ExerciseCategoryCtrl extends DBConn{
         return newEC;
     }
 
-    public void showCategories(Scanner scanner) {
-        String name;
-        System.out.println("Here are the existing categories: ");
-
-
-    }
-
     public void addExerciseToCategory(Scanner scanner) {
         String s;
-        showCategories(scanner);
+        System.out.println("Here are the existing categories: ");
+        ec.listCategories(conn);
         System.out.println("What category should the exercise be in?");
         System.out.println("If you want to make a new category, write 'y', else 'n': ");
         s = scanner.nextLine();
-        if (s.equals("y")) {
+        /*if (s.equals("y")) {
             ec = addCategory(scanner);
         } else {
 
-        }
+        }*/
     }
 }
